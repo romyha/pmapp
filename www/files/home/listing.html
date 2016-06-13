@@ -1,0 +1,45 @@
+<ion-view view-title="Devices">
+  <!--<ion-nav-title class="logo"><img src="img/sncn_logo.png" height="50" width="185" /></ion-nav-title>-->
+
+
+  <ion-header-bar class="item item-input bar-subheader">
+      <i class="icon ion-search placeholder-icon "></i>
+      <input type="search" placeholder="Search by type, code or status-color" ng-model="textFilter">
+  </ion-header-bar>
+
+  <ion-content class="has-footer has-header">
+    <ion-list>
+
+      <ion-item id="top-row" align="center" class="item-divider dark-tabs">
+        <div class="row">
+          <span class="col col-33">NAME</span>
+          <span class="col col-33">ID</span>
+          <span class="col col-33">STATUS</span>          
+        </div>
+      </ion-item>
+
+      <div ng-repeat="device in vm.devices | filter : textFilter">
+        <ion-item align="center" href="#/app/device">
+          <div class="row">
+            <span class="col col-33">{{device.name}}</span>
+            <span class="col col-33">{{device.id}}</span>
+            <i class="col col-33 icon ion-record {{device.status}}-status larger"></i>
+            <i class="col ion-chevron-right"></i>
+          </div>
+        </ion-item>
+      </div>
+    </ion-list>
+
+  </ion-content>
+  
+  <ion-footer class="tabs tabs-secondary tabs-icon-top dark-tabs">
+    <a class="tab-item" href="#/app/camera">
+      <i class="icon ion-qr-scanner"></i>Scan
+    </a>
+    <a class="tab-item" href="#/app/devices/new">
+      <i class="icon ion-plus-round"></i>Add device
+    </a>
+
+    
+  </ion-footer>
+</ion-view>

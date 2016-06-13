@@ -1,0 +1,57 @@
+<ion-view view-title="{{vm.device.name}}">
+    <!--<ion-nav-title class="logo"><img src="img/sncn_logo.png" height="50" width="185" /></ion-nav-title>-->
+
+    <ion-content class="has-footer has-header">
+        <div class="list card small-margin ">
+            <div class="item less-padding device-card">
+                <div class="row">
+                    <div class="col col-90">
+                        <h2>Name: {{vm.device.name}}</h2>
+                        <h2>ID: {{vm.device.id}} </h2>
+                    </div>
+                    <div class="col" align="right"><i class="col col-33 icon ion-record {{vm.device.status}}-status"></i></div>
+                    
+                </div>
+            </div>
+            <div class="item item-body less-padding device-card">
+                <p>{{vm.device.description}}</p>
+            </div>
+        </div>
+        
+        <div align="center" class="item item-divider dark-tabs"> CHANGES </div>
+
+        <div class="list card small-margin" ng-repeat="change in vm.device.changes | orderBy : '-date'">
+            <div class="item item-divider less-padding">
+                <div class="row">
+                    <div align="left" class="col col-40">
+                        {{change.date | date : "d MMM yyyy"}}
+                    </div>
+                    <div align="center" class="col col-40">
+                        {{change.author}}
+                    </div>
+                    <i class="col col-5 icon ion-record {{change.status}}-status" align="right"></i>
+                </div>
+            </div>
+            <div class="item item-text-wrap less-padding row">
+                <div class="col col-95">
+                {{change.message}} 
+                </div><button ng-click="vm.toEdit()" class="col-05 button button-icon ion-edit dark"></button>
+            </div>
+        </div>
+
+    </ion-content>
+
+    <ion-footer class="tabs tabs-secondary tabs-icon-top dark-tabs">
+        
+        <a class="tab-item" ng-click="vm.goHome()">
+            <i class="icon ion-home"></i>Home
+        </a>
+        <a class="tab-item" href="#/app/device/edit">
+            <i class="icon ion-edit"></i>Edit
+        </a>
+        <a class="tab-item" href="#/app/device/change/new">
+            <i class="icon ion-wrench"></i>Add change
+        </a>
+
+    </ion-footer>
+</ion-view>

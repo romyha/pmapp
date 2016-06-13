@@ -1,0 +1,107 @@
+/* Empty. Add your own CSS if you like */
+
+.fullheight {
+    position: fixed;
+    top: 100px;
+    width: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+.green-status {
+    color: lawngreen;
+}
+
+.red-status {
+    color: orangered;
+}
+
+.yellow-status {
+    color: yellow;
+}
+
+.blue-status {
+    color: deepskyblue;
+}
+
+.fixed-content {
+    position: fixed;
+    top: 40px;
+    width: 100%;
+}
+
+.undecorate {
+    text-decoration: none !important;
+}
+
+.small-margin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.less-padding {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.more-padding {
+    padding-top: 10px;
+    padding-bottom: 10px;    
+}
+
+.more-margin {
+    margin-top: 10px;
+    margin-bottom: 10px;    
+}
+
+.big-area {
+    height: 90px;
+}
+
+.green-select {
+    background-color: lawngreen !important;
+}
+
+.yellow-select {
+    background-color: yellow !important;
+}
+
+.red-select {
+    background-color: orangered !important;
+}
+
+.blue-select {
+    background-color: deepskyblue !important;
+}
+
+ion-view {
+    /*background-color: lightgrey !important;*/
+}
+
+.device-card {
+    background-color: #f5f5f5;
+}
+
+.dark-tabs {
+    background-color: gray;
+    color: white !important;
+}
+
+.list.card:last-child {
+    margin-bottom: 40px !important;
+}
+
+.larger {
+    font-size: 20px;
+}
+
+select {
+    text-align: center;
+}
+
+.black {
+    color: black !important;
+}
+

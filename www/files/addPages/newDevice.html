@@ -1,0 +1,44 @@
+<ion-view title="Add Device">
+    <ion-content>
+        <form class="list">
+            <label class="item item-input">
+                <span class="input-label">Name</span>
+                <input type="text" placeholder="Name">
+            </label>
+
+            <label class="item item-input">
+                <span class="input-label">Type</span>
+                <input type="text" placeholder="Type">
+            </label>
+
+            <label class="item item-input">
+                <span class="input-label">ID</span>
+                <input type="text" placeholder="ID">
+            </label>
+            <label class="item item-select">
+                <span class="item-label">Status</span>
+                <select class="item-select"  style="background-color: {{vm.color}} !important;" ng-model="vm.selector" ng-change="vm.changeColor()">
+                    <option>none</option>
+                    <option value="green">OK</option>
+                    <option value="yellow">Limited</option>
+                    <option value="blue">Reserved</option>
+                    <option value="red">Broken</option>
+                </select>
+            </label>
+
+
+            <label class="item item-input">
+                <span class="input-label">Description</span>
+                <textarea placeholder="Description" class="big-area"></textarea>
+            </label>
+            <button class="button button-outline button-dark button-full" ng-click="vm.addChange()">Add</button>
+        </form>
+    </ion-content>
+
+    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top">
+        <a class="tab-item" ng-click="vm.goHome()">
+            <i class="icon ion-home"></i>Home
+        </a>
+    </ion-footer>
+
+</ion-view>

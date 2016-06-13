@@ -1,0 +1,35 @@
+<ion-view title="Add Change">
+    <ion-content class="has-footer">
+        <form class="list">
+            <label class="item item-input">
+                <span class="input-label">Name</span>
+                <input type="text" placeholder="Name">
+            </label>
+
+            <label class="item item-select">
+                <span class="item-label">Status</span>
+                <select class="item-select" style="background-color: {{vm.color}} !important" ng-model="vm.selector" ng-change="vm.changeColor()">
+                    <option>none</option>
+                   <option value="green">OK</option>
+                    <option value="yellow">Limited</option>
+                    <option value="blue">Reserved</option>
+                    <option value="red">Broken</option>
+                </select>
+            </label>
+
+
+
+            <label class="item item-input">
+                <span class="input-label">Change Message</span>
+                <textarea placeholder="Change" class="big-area"></textarea>
+            </label>
+            <button class="button button-outline button-dark button-full" ng-click="vm.addChange()">Add</button>
+        </form>
+    </ion-content>
+    
+    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top">
+        <a class="tab-item" ng-click="vm.goHome()">
+            <i class="icon ion-home"></i>Home
+        </a>
+    </ion-footer>
+</ion-view>

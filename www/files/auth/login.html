@@ -1,0 +1,25 @@
+<ion-view view-title="Login">
+
+  <ion-content>
+    <h1 class="title">Login</h1>
+    <form ng-submit="doLogin()">
+      <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="email" ng-model="loginData.username">
+        </label>
+      <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="loginData.password">
+        </label>
+      <p>{{log}}</p>
+      <div class="button-bar">
+        <button class="button button-large button-positive" type="submit">Log in</button>
+        <button type="button" class="button button-large button-outline button-stable" ng-click="vm.toRegister()">Sign up</button>
+      </div>
+      <div align="center">
+        <button type="button" class="more-margin button button-large button-outline button-dark" ng-click="vm.asTestUser()">Use Test Mode</button>
+      </div>
+
+    </form>
+  </ion-content>
+</ion-view>
