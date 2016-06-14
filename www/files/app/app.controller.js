@@ -3,7 +3,8 @@ angular.module('starter.controllers', [])
 
   .controller('AppCtrl', function ($rootScope, $scope, $ionicHistory, $ionicModal, $timeout, $location, authentication) {
 
-    document.addEventListener("deviceready", function () { screen.msLockOrientation('portrait'); }, false);
+    //avoid changing screen orientation
+    document.addEventListener("deviceready", function () { screen.lockOrientation('portrait'); }, false);
     
     
 

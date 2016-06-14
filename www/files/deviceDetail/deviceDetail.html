@@ -10,39 +10,39 @@
                         <h2>ID: {{vm.device.id}} </h2>
                     </div>
                     <div class="col" align="right"><i class="col col-33 icon ion-record {{vm.device.status}}-status"></i></div>
-                    
+
                 </div>
             </div>
             <div class="item item-body less-padding device-card">
                 <p>{{vm.device.description}}</p>
             </div>
         </div>
-        
+
         <div align="center" class="item item-divider dark-tabs"> CHANGES </div>
 
         <div class="list card small-margin" ng-repeat="change in vm.device.changes | orderBy : '-date'">
-            <div class="item item-divider less-padding">
+            <div class="item item-divider less-padding sidepad0">
                 <div class="row">
-                    <div align="left" class="col col-40">
+                    <div align="left" class="col col-30">
                         {{change.date | date : "d MMM yyyy"}}
                     </div>
-                    <div align="center" class="col col-40">
+                    <div align="center" class="col col-50">
                         {{change.author}}
                     </div>
                     <i class="col col-5 icon ion-record {{change.status}}-status" align="right"></i>
+                    <button ng-click="vm.toEdit()" class="right actbutton button-icon ion-edit dark larger"></button>
                 </div>
             </div>
-            <div class="item item-text-wrap less-padding row">
-                <div class="col col-95">
-                {{change.message}} 
-                </div><button ng-click="vm.toEdit()" class="col-05 button button-icon ion-edit dark"></button>
+            <div class="item item-text-wrap less-padding">
+                    {{change.message}}
+                   <!-- <div class="right"><a ng-click="vm.toEdit()" class="button button-icon ion-edit dark"></a></div>-->
             </div>
         </div>
 
     </ion-content>
 
     <ion-footer class="tabs tabs-secondary tabs-icon-top dark-tabs">
-        
+
         <a class="tab-item" ng-click="vm.goHome()">
             <i class="icon ion-home"></i>Home
         </a>

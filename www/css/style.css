@@ -105,3 +105,16 @@ select {
     color: black !important;
 }
 
+.right {
+    text-align: right;
+}
+
+.sidepad0 {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.actbutton:active {
+    color: #a2a2a2;
+    vertical-align: middle !important;
+}

@@ -1,8 +1,8 @@
 (function () {
     angular.module("pm").controller("listingCtrl", listingCtrl);
 
-    
-    function listingCtrl() {
+
+    function listingCtrl($location, $ionicLoading, $scope, $ionicPopup) {
         var vm = this;
 
         vm.devices = [{
@@ -55,5 +55,57 @@
                 status: "blue"
             }];
 
+        vm.scan = function () {
+
+            if (!!window.cordova) {   //if running in browser, don't show loading
+                $ionicLoading.show({
+                    template: 'Loading...'
+                });
+
+
+                /**for Android 5+ ask for camera permission to scan */
+                cordova.plugins.diagnostic.requestCameraAuthorization(function (status) {
+                    if (status == cordova.plugins.diagnostic.permissionStatus.GRANTED) {
+                        doScanning();
+                    } else {
+                        alert("You cannot scan without granting access to camera.");
+                    }
+                }, function (error) {
+                    alert(error);
+                });
+            }
+
+            function doScanning() {
+                $ionicLoading.hide();
+
+                cordova.plugins.barcodeScanner.scan(
+                    function (result) {
+                        var confirm;    //pretend cancelled to be not found & not cancelled to found device
+                        if (!result.cancelled) {
+                            alert("Result: " + result.text + "\n" + "Format: " + "\n" + result.format);
+                            $location.path('/app/device');    //if result found navigate to device
+                            $scope.$apply();
+                        } else {
+                            confirm = $ionicPopup.confirm({
+                                title: 'No device found',
+                                template: 'Do you want to add one?'
+                            });
+                            confirm.then(function (confirmed) {
+                                if (confirmed) {
+                                    $location.path('/app/devices/new');
+                                }
+                            }).call();
+                        }
+                    }, function (error) {
+                        alert("Scanning failed: " + error);
+                    }
+                );
+
+            }
+
+        }
+
     }
+
+
 })();

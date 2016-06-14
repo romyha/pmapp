@@ -12,18 +12,6 @@
         template: 'Loading...'
       })*/
 
-      /**for Android 5+ ask for camera permission to scan */
-      cordova.plugins.diagnostic.requestCameraAuthorization(function (status) {
-        if (status == cordova.plugins.diagnostic.permissionStatus.GRANTED) {
-          scanCode();
-        } else {
-          alert("You cannot scan without granting access to camera.");
-          $location.path('/app/devices');
-          $scope.$apply();
-        }
-      }, function (error) {
-        alert(error);
-      });
 
     }
 
@@ -61,14 +49,27 @@
 
 
     $scope.$on('$ionicView.enter', function (e) {
-      if (ready) {
-        $ionicLoading.hide()
-      } else {
-        if (!!window.cordova) {   //if running in browser, don't show loading
-          $ionicLoading.show({
-            template: 'Loading...'
-          });
+      if (!!window.cordova) {   //if running in browser, don't show loading
+        $ionicLoading.show({
+          template: 'Loading...'
+        });
+
+        if (ready) {
+          $ionicLoading.hide()
         }
+
+        /**for Android 5+ ask for camera permission to scan */
+        cordova.plugins.diagnostic.requestCameraAuthorization(function (status) {
+          if (status == cordova.plugins.diagnostic.permissionStatus.GRANTED) {
+            scanCode();
+          } else {
+            alert("You cannot scan without granting access to camera.");
+            $location.path('/app/devices');
+            $scope.$apply();
+          }
+        }, function (error) {
+          alert(error);
+        });
       }
 
     });
