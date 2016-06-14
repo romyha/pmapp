@@ -89,9 +89,9 @@ ion-view {
     color: white !important;
 }
 
-.list.card:last-child {
+/*.list.card:last-child {
     margin-bottom: 40px !important;
-}
+}*/
 
 .larger {
     font-size: 20px;

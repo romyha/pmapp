@@ -1,4 +1,4 @@
-<ion-view view-title="Devices">
+<ion-view  view-title="Devices">
   <!--<ion-nav-title class="logo"><img src="img/sncn_logo.png" height="50" width="185" /></ion-nav-title>-->
 
 
@@ -10,7 +10,7 @@
   <ion-content class="has-footer has-header">
     <ion-list>
 
-      <ion-item id="top-row" align="center" class="item-divider dark-tabs">
+      <ion-item align="center" class="item item-divider dark-tabs">
         <div class="row">
           <span class="col col-33">NAME</span>
           <span class="col col-33">ID</span>
@@ -19,14 +19,14 @@
       </ion-item>
 
       <div ng-repeat="device in vm.devices | filter : textFilter">
-        <ion-item align="center" href="#/app/device">
+        <a align="center" class="item" href="#/app/device">
           <div class="row">
             <span class="col col-33">{{device.name}}</span>
             <span class="col col-33">{{device.id}}</span>
-            <i class="col col-33 icon ion-record {{device.status}}-status larger"></i>
-            <i class="col ion-chevron-right"></i>
+            <span class="col col-33"><i class="icon ion-record {{device.status}}-status larger"></i></span>
+            <span align="right" class="col"><i class="larger ion-chevron-right"></i></span>
           </div>
-        </ion-item>
+        </a>
       </div>
     </ion-list>
 

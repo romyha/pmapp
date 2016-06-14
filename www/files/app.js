@@ -22,7 +22,9 @@ angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starte
     });
   })
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    $ionicConfigProvider.navBar.alignTitle('center');
+    
     $stateProvider
 
       .state('app', {
