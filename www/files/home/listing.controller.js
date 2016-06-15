@@ -2,8 +2,12 @@
     angular.module("pm").controller("listingCtrl", listingCtrl);
 
 
-    function listingCtrl($location, $ionicLoading, $scope, $ionicPopup) {
+    function listingCtrl($location, $ionicLoading, $scope, $ionicPopup, $ionicHistory) {
         var vm = this;
+        
+        vm.toDevice = function() {
+            $location.path("/app/device");
+        }
 
         vm.devices = [{
             name: "DC5K A3",

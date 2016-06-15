@@ -19,7 +19,7 @@
       </ion-item>
 
       <div ng-repeat="device in vm.devices | filter : textFilter">
-        <a align="center" class="item" href="#/app/device">
+        <a align="center" class="item" ng-click="vm.toDevice()">
           <div class="row">
             <span class="col col-33">{{device.name}}</span>
             <span class="col col-33">{{device.id}}</span>

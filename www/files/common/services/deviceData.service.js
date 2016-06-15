@@ -8,5 +8,13 @@
         var deviceById = function (id) {
             return $http.get(apiUrl + '/devices/' + id);
         };
+        
+        addDevice = function(device) {
+            return $http.post(apiUrl + '/devices', device);
+        }
+        
+        return {
+            addDevice: addDevice
+        };
     }
 })();

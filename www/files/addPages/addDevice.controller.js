@@ -1,11 +1,18 @@
 (function () {
     angular.module("pm").controller("addDeviceCtrl", addDeviceCtrl);
 
-    addDeviceCtrl.$inject = ['$location', '$ionicHistory'];
-    function addDeviceCtrl($location, $ionicHistory) {
+    addDeviceCtrl.$inject = ['$location', '$ionicHistory', 'deviceData'];
+    function addDeviceCtrl($location, $ionicHistory, deviceData) {
         var vm = this;
 
-        vm.addChange = function () {
+        vm.addDevice = function () {
+            deviceData.addDevice({
+                name: vm.device.name,
+                description: vm.device.description,
+                status: vm.selector,
+                location: vm.device.location
+            });
+            
             $ionicHistory.nextViewOptions({
                 disableBack: true
             });

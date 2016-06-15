@@ -1,14 +1,14 @@
 <ion-view title="Add Device">
     <ion-content>
-        <form class="list">
+        <form class="list" ng-submit="vm.addDevice()">
             <label class="item item-input">
                 <span class="input-label">Name</span>
-                <input type="text" placeholder="Name">
+                <input type="text" placeholder="Name" ng-model="vm.device.name">
             </label>
 
             <label class="item item-input">
-                <span class="input-label">Type</span>
-                <input type="text" placeholder="Type">
+                <span class="input-label">Location</span>
+                <input type="text" placeholder="Location" ng-model="vm.device.location">
             </label>
 
             <label class="item item-input">
@@ -29,9 +29,9 @@
 
             <label class="item item-input">
                 <span class="input-label">Description</span>
-                <textarea placeholder="Description" class="big-area"></textarea>
+                <textarea placeholder="Description" class="big-area" ng-model="vm.device.description"></textarea>
             </label>
-            <button class="button button-outline button-dark button-full" ng-click="vm.addChange()">Add</button>
+            <button class="button button-outline button-dark button-full" type="submit">Add</button>
         </form>
     </ion-content>
 
