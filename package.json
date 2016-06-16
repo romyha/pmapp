@@ -2,6 +2,9 @@
   "name": "prototype management",
   "version": "1.1.1",
   "description": "managing prototype information",
+  "scripts": {
+        "start": "node project/server.js"
+    },
   "engines": {
     "node": "~6.2.1",
     "npm": "~3.9.3"
