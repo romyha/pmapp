@@ -1,20 +1,25 @@
 <ion-view title="Add Device">
     <ion-content>
-        <form class="list" ng-submit="vm.addDevice()">
-            <label class="item item-input">
-                <span class="input-label">Name</span>
-                <input type="text" placeholder="Name" ng-model="vm.device.name">
+        <form name="deviceAddForm" class="list" ng-submit="vm.onSubmit()" novalidate>
+            <div class="item item-input-inset">
+                <span class="input-label ">Name</span>
+                <label class="item-input-wrapper">                
+                <input name="devicename" type="text" placeholder="Name" ng-model="vm.device.name" ng-required="true">
             </label>
+            </div>
 
-            <label class="item item-input">
+            <div class="item item-input-inset">
                 <span class="input-label">Location</span>
-                <input type="text" placeholder="Location" ng-model="vm.device.location">
+                <label class="item-input-wrapper">
+                
+                <input name="location" type="text" placeholder="Location" ng-model="vm.device.location" ng-required="true">
             </label>
+            </div>
 
-            <label class="item item-input">
+            <!--<label class="item item-input">
                 <span class="input-label">ID</span>
                 <input type="text" placeholder="ID">
-            </label>
+            </label>-->
             <label class="item item-select">
                 <span class="item-label">Status</span>
                 <select class="item-select"  style="background-color: {{vm.color}} !important;" ng-model="vm.selector" ng-change="vm.changeColor()">
@@ -26,16 +31,20 @@
                 </select>
             </label>
 
-
+            
             <label class="item item-input">
                 <span class="input-label">Description</span>
                 <textarea placeholder="Description" class="big-area" ng-model="vm.device.description"></textarea>
             </label>
-            <button class="button button-outline button-dark button-full" type="submit">Add</button>
+            <div class="item" ng-show="deviceAddForm.$invalid">
+                <p ng-show="deviceAddForm.devicename.$invalid" class="warning"><i class="ion-alert-circled"> Name required</i></p>
+                <p ng-show="deviceAddForm.location.$invalid" class="warning"><i class="ion-alert-circled"> Location required</i></p>
+            </div>
+            <button class="button button-outline button-dark button-full" type="submit" ng-disabled="deviceAddForm.$invalid">Add</button>
         </form>
     </ion-content>
 
-    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top">
+    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top hide-on-keyboard-open">
         <a class="tab-item" ng-click="vm.goHome()">
             <i class="icon ion-home"></i>Home
         </a>

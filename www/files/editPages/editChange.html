@@ -1,10 +1,14 @@
-<ion-view title="Edit Change">
+<ion-view title="Edit Change for {{vm.device.name}}">
     <ion-content>
-        <form class="list">
-
+        <form class="list" ng-submit="vm.edit()">
+            <label>
+                <ion-item>
+                    Created on: {{vm.change.date | date : "d MMM yyyy H:mm"}}
+                </ion-item>
+            </label>
             <label class="item item-input">
-                <span class="input-label">ID</span>
-                <input type="text" placeholder="ID">
+                <span class="input-label">Name</span>
+                <input type="text" placeholder="Name" ng-model="vm.name">
             </label>
             <label class="item item-select">
                 <span class="item-label">Status</span>
@@ -19,14 +23,14 @@
 
 
             <label class="item item-input">
-                <span class="input-label">Description</span>
-                <textarea placeholder="Description" class="big-area"></textarea>
+                <span class="input-label">Change message</span>
+                <textarea placeholder="Message" class="big-area" ng-model="vm.message"></textarea>
             </label>
-            <button class="button button-outline button-dark button-full" ng-click="vm.addChange()">Edit</button>
+            <button class="button button-outline button-dark button-full" type="submit">Edit</button>
         </form>
     </ion-content>
 
-    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top">
+    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top hide-on-keyboard-open">
         <a class="tab-item" ng-click="vm.goHome()">
             <i class="icon ion-home"></i>Home
         </a>

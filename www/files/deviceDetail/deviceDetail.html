@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col col-90">
                         <h2>Name: {{vm.device.name}}</h2>
-                        <h2>ID: {{vm.device.id}} </h2>
+                        <h2>ID: {{vm.deviceid}} </h2>
                     </div>
                     <div class="col" align="right"><i class="col col-33 icon ion-record {{vm.device.status}}-status"></i></div>
 
@@ -21,7 +21,7 @@
         <div align="center" class="item item-divider dark-tabs"> CHANGES </div>
 
         <div class="list card small-margin" ng-repeat="change in vm.device.changes | orderBy : '-date'">
-            <div class="item item-divider less-padding sidepad0">
+            <div class="item item-divider less-padding sidepad0" ng-model="vm.device.change">
                 <div class="row">
                     <div align="left" class="col col-30">
                         {{change.date | date : "d MMM yyyy"}}
@@ -30,7 +30,7 @@
                         {{change.author}}
                     </div>
                     <i class="col col-5 icon ion-record {{change.status}}-status" align="right"></i>
-                    <button ng-click="vm.toEdit()" class="right actbutton button-icon ion-edit dark larger"></button>
+                    <button ng-click="vm.toEdit(change._id)" class="right actbutton button-icon ion-edit dark larger"></button>
                 </div>
             </div>
             <div class="item item-text-wrap less-padding">
@@ -46,10 +46,10 @@
         <a class="tab-item" ng-click="vm.goHome()">
             <i class="icon ion-home"></i>Home
         </a>
-        <a class="tab-item" href="#/app/device/edit">
+        <a class="tab-item" href="#/app/devices/{{vm.deviceid}}/edit">
             <i class="icon ion-edit"></i>Edit
         </a>
-        <a class="tab-item" href="#/app/device/change/new">
+        <a class="tab-item" href="#/app/devices/{{vm.deviceid}}/changes">
             <i class="icon ion-wrench"></i>Add change
         </a>
 

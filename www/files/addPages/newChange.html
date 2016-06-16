@@ -1,14 +1,14 @@
 <ion-view title="Add Change">
     <ion-content class="has-footer">
-        <form class="list">
+        <form name="changeAddForm" class="list" ng-submit="vm.addChange()">
             <label class="item item-input">
                 <span class="input-label">Name</span>
-                <input type="text" placeholder="Name">
+                <input name="author" type="text" placeholder="Name" ng-model="vm.author"  ng-required="true">
             </label>
 
             <label class="item item-select">
                 <span class="item-label">Status</span>
-                <select class="item-select" style="background-color: {{vm.color}} !important" ng-model="vm.selector" ng-change="vm.changeColor()">
+                <select name="status" class="item-select" style="background-color: {{vm.color}} !important" ng-model="vm.selector" ng-change="vm.changeColor()"  ng-required="true">
                     <option>none</option>
                    <option value="green">OK</option>
                     <option value="yellow">Limited</option>
@@ -21,13 +21,20 @@
 
             <label class="item item-input">
                 <span class="input-label">Change Message</span>
-                <textarea placeholder="Change" class="big-area"></textarea>
+                <textarea name="message" placeholder="Change" class="big-area" ng-model="vm.message"  ng-required="true"></textarea>
             </label>
-            <button class="button button-outline button-dark button-full" ng-click="vm.addChange()">Add</button>
+
+            <div class="item" ng-show="changeAddForm.$invalid">
+                <p ng-show="changeAddForm.author.$invalid" class="warning"><i class="ion-alert-circled"> Name required</i></p>
+                <p ng-show="changeAddForm.status.$invalid" class="warning"><i class="ion-alert-circled"> Status required</i></p>
+                <p ng-show="changeAddForm.message.$invalid" class="warning"><i class="ion-alert-circled"> Change text required</i></p>
+            </div>
+
+            <button class="button button-outline button-dark button-full" type="submit" ng-disabled="changeAddForm.$invalid">Add</button>
         </form>
     </ion-content>
-    
-    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top">
+
+    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top hide-on-keyboard-open">
         <a class="tab-item" ng-click="vm.goHome()">
             <i class="icon ion-home"></i>Home
         </a>

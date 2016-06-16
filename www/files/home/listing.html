@@ -19,10 +19,10 @@
       </ion-item>
 
       <div ng-repeat="device in vm.devices | filter : textFilter">
-        <a align="center" class="item" ng-click="vm.toDevice()">
+        <a align="center" class="item" ng-href="#/app/devices/{{device._id}}">
           <div class="row">
             <span class="col col-33">{{device.name}}</span>
-            <span class="col col-33">{{device.id}}</span>
+            <span class="col col-33">{{device._id}}</span>
             <span class="col col-33"><i class="icon ion-record {{device.status}}-status larger"></i></span>
             <span align="right" class="col"><i class="larger ion-chevron-right"></i></span>
           </div>
@@ -36,7 +36,7 @@
     <a class="tab-item" ng-click="vm.scan()">
       <i class="icon ion-qr-scanner"></i>Scan
     </a>
-    <a class="tab-item" href="#/app/devices/new">
+    <a class="tab-item" href="#/app/devices/id/new">
       <i class="icon ion-plus-round"></i>Add device
     </a>
 

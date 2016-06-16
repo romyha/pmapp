@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starter.auth'])
+angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starter.auth', 'ngRoute'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -81,7 +81,7 @@ angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starte
       })
 
       .state('app.device', {
-        url: '/device',
+        url: '/devices/:id',
         views: {
           'menuContent': {
             templateUrl: 'files/deviceDetail/deviceDetail.html',
@@ -92,7 +92,7 @@ angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starte
       })
 
       .state('app.changeadd', {
-        url: '/device/change/new',
+        url: '/devices/:id/changes',
         views: {
           'menuContent': {
             templateUrl: 'files/addPages/newChange.html',
@@ -103,7 +103,7 @@ angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starte
       })
       
       .state('app.changeedit', {
-        url: '/device/change/edit',
+        url: '/devices/:deviceid/changes/:changeid/edit',
         views: {
           'menuContent': {
             templateUrl: 'files/editPages/editChange.html',
@@ -114,7 +114,7 @@ angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starte
       })
 
       .state('app.deviceadd', {
-        url: '/devices/new',
+        url: '/devices/id/new',
         views: {
           'menuContent': {
             templateUrl: 'files/addPages/newDevice.html',
@@ -125,7 +125,7 @@ angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starte
       })
       
       .state('app.deviceedit', {
-        url: '/device/edit',
+        url: '/devices/:id/edit',
         views: {
           'menuContent': {
             templateUrl: 'files/editPages/editDevice.html',

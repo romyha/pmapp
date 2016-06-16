@@ -2,14 +2,23 @@
     angular.module("pm").controller("listingCtrl", listingCtrl);
 
 
-    function listingCtrl($location, $ionicLoading, $scope, $ionicPopup, $ionicHistory) {
+    function listingCtrl($location, $ionicLoading, $scope, $ionicPopup, $ionicHistory, deviceData) {
         var vm = this;
-        
-        vm.toDevice = function() {
+
+        vm.toDevice = function () {
             $location.path("/app/device");
         }
 
-        vm.devices = [{
+        $scope.$on('$ionicView.enter', function () {
+            deviceData.devices().success(function (data) {
+                vm.devices = data;
+            }).error(function (err) {
+                console.log(err)
+            });
+        });
+
+
+        /*vm.devices = [{
             name: "DC5K A3",
             id: 12345,
             status: "green"
@@ -57,7 +66,7 @@
                 name: "S001",
                 id: 9012,
                 status: "blue"
-            }];
+            }];*/
 
         vm.scan = function () {
 
@@ -86,19 +95,35 @@
                     function (result) {
                         var confirm;    //pretend cancelled to be not found & not cancelled to found device
                         if (!result.cancelled) {
-                            alert("Result: " + result.text + "\n" + "Format: " + "\n" + result.format);
-                            $location.path('/app/device');    //if result found navigate to device
-                            $scope.$apply();
-                        } else {
-                            confirm = $ionicPopup.confirm({
-                                title: 'No device found',
-                                template: 'Do you want to add one?'
-                            });
-                            confirm.then(function (confirmed) {
-                                if (confirmed) {
-                                    $location.path('/app/devices/new');
+                            deviceData.deviceById(result.text).success(function (device) {
+                                if (device["message"]){}
+                                   // alert(device["message"]);
+                                else {
+                                    $location.path('/app/devices/' + device._id);    //if result found navigate to device
+                                    $scope.$apply();
                                 }
-                            }).call();
+                            }).error(function (err) {
+                                //alert(err);
+                                confirm = $ionicPopup.confirm({
+                                    title: 'Not found',
+                                    template: 'There is no device with that ID.\nDo you want to add one?'
+                                });
+                                confirm.then(function (confirmed) {
+                                    if (confirmed) {
+                                        $location.path('/app/devices/id/new');
+                                    }
+                                }).call();
+                            });
+                        } else {
+                            /* confirm = $ionicPopup.confirm({
+                                 title: 'No device found',
+                                 template: 'Do you want to add one?'
+                             });
+                             confirm.then(function (confirmed) {
+                                 if (confirmed) {
+                                     $location.path('/app/devices/new');
+                                 }
+                             }).call();*/
                         }
                     }, function (error) {
                         alert("Scanning failed: " + error);

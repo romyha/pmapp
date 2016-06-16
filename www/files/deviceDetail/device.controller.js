@@ -1,11 +1,21 @@
 (function () {
     angular.module("pm").controller("detailCtrl", detailCtrl);
 
-    detailCtrl.$inject = ['$location', '$ionicHistory'];
-    function detailCtrl($location, $ionicHistory) {
+    detailCtrl.$inject = ['$location', '$ionicHistory', 'deviceData', '$stateParams', '$scope'];
+    function detailCtrl($location, $ionicHistory, deviceData, $stateParams, $scope) {
         var vm = this;
 
-        vm.device = {
+        vm.deviceid = $stateParams.id;      
+        
+        $scope.$on('$ionicView.enter', function () {
+            deviceData.deviceById(vm.deviceid).success(function (data) {
+                vm.device = data;
+            }).error(function (err) {
+                console.log(err)
+            });
+        });
+
+        /*vm.device = {
             name: "DC5K A3",
             id: 12345,
             status: "red",
@@ -46,7 +56,7 @@
                     status: "green",
                     message: "Phase C FETs replaced. , phase_B FETs broke and replaced, functional at low voltages. 20160125: the AND chip on C_L was brocken. I shorted it. (2016_01_29) the FETs of phase C are replaced, but there is a short between DC-bus terminals"
                 }]
-        }
+        }*/
 
         vm.goHome = function () {
             $ionicHistory.nextViewOptions({
@@ -57,8 +67,8 @@
 
         }
 
-        vm.toEdit = function () {
-            $location.path('/app/device/change/edit');
+        vm.toEdit = function (changeid) {
+            $location.path('/app/devices/'+vm.deviceid+'/changes/'+changeid+'/edit');            
         }
     }
 })();

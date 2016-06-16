@@ -1,15 +1,24 @@
 (function () {
     angular.module("pm").controller("changeCtrl", changeCtrl);
 
-    changeCtrl.$inject = ['$location', '$ionicHistory'];
-    function changeCtrl($location, $ionicHistory) {
+    changeCtrl.$inject = ['$location', '$ionicHistory', '$stateParams', 'deviceData'];
+    function changeCtrl($location, $ionicHistory, $stateParams, deviceData) {
         var vm = this;
 
+        vm.deviceid = $stateParams.id;
+
         vm.addChange = function () {
+            var change = {
+                author: vm.author,
+                status: vm.selector,
+                message: vm.message
+            };
+            deviceData.addChangeById(vm.deviceid, change);
+
             $ionicHistory.nextViewOptions({
                 disableBack: true
             });
-            $location.path("/app/device");
+            $location.path("/app/devices/" + vm.deviceid);
             $ionicHistory.nextViewOptions.disableBack = false;
         }
 

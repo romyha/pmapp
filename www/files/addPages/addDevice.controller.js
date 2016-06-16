@@ -4,8 +4,18 @@
     addDeviceCtrl.$inject = ['$location', '$ionicHistory', 'deviceData'];
     function addDeviceCtrl($location, $ionicHistory, deviceData) {
         var vm = this;
+        vm.device = {};
+        vm.onSubmit = function() {
+            vm.formError = "";
+            if(!vm.device.name || !location){
+                vm.formError = "Name and location of device required.";
+                return false;
+            } else {
+                addDevice();
+            }
+        }
 
-        vm.addDevice = function () {
+        addDevice = function () {
             deviceData.addDevice({
                 name: vm.device.name,
                 description: vm.device.description,
@@ -16,7 +26,7 @@
             $ionicHistory.nextViewOptions({
                 disableBack: true
             });
-            $location.path("/app/device");
+            $location.path("/app/devices");
             $ionicHistory.nextViewOptions.disableBack = false;
         }
 
