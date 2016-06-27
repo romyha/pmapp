@@ -7,7 +7,7 @@
 
         vm.devicecode = $stateParams.code;
 
-       // $scope.$on('$ionicView.enter', function () {
+        $scope.$on('$ionicView.enter', function () {
             deviceData.deviceByCode(vm.devicecode).success(function (data) {
                 vm.device = data;
                 var states = [];
@@ -47,7 +47,7 @@
             }).error(function (err) {
                 console.log(err)
             });
-       // });
+        });
 
         vm.deleteChange = function (changeid) {
             confirmDelete = $ionicPopup.confirm({
