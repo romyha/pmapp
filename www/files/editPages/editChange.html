@@ -1,32 +1,48 @@
-<ion-view title="Edit Change">
+<ion-view title="Edit Change for {{vm.device.name}}">
     <ion-content>
-        <form class="list">
+        <form class="list list-inset" ng-submit="vm.edit()">
+            
+            <item>
+                <div class="item item-input-inset col-center">
+                    Created on: 
+                    {{vm.change.date | date : "d MMM yyyy H:mm "}} &nbsp;
+                    <button type="button" class="button button-small no-padding icon ion-android-calendar" ng-click="vm.pickDate()" ng-hide="browser"></button>
+                    <ionic-datepicker date="vm.change.date" max="vm.maxDate" callback="vm.saveDate" ng-show="browser">
+                        <button type="button" class="button button-small button-positive icon ion-android-calendar no-padding"></button>
+                    </ionic-datepicker>
+                </div>
+            </item>
 
-            <label class="item item-input">
-                <span class="input-label">ID</span>
-                <input type="text" placeholder="ID">
-            </label>
             <label class="item item-select">
                 <span class="item-label">Status</span>
                 <select class="item-select" style="background-color: {{vm.color}} !important" ng-model="vm.selector" ng-change="vm.changeColor()">
-                    <option>none</option>
-                    <option>green</option>
-                    <option>yellow</option>
-                    <option>blue</option>
-                    <option>red</option>
+                    <option value="green">OK</option>
+                    <option value="yellow">Limited</option>
+                    <option value="blue">Reserved</option>
+                    <option value="red">Broken</option>
                 </select>
             </label>
 
 
-            <label class="item item-input">
-                <span class="input-label">Description</span>
-                <textarea placeholder="Description" class="big-area"></textarea>
+            <label class="item item-input-inset">
+                <span class="input-label">Message</span>
+                <textarea placeholder="Message" class="big-area" ng-model="vm.message"></textarea>
             </label>
-            <button class="button button-outline button-dark button-full" ng-click="vm.addChange()">Edit</button>
+
+            <div class="item item-input-inset">
+                <span class="input-label">Location</span>
+                <label class="item-input-wrapper">                
+                <input name="location" type="text" placeholder="Location" ng-model="vm.change.location" ng-change="vm.checkIfEmpty()">
+            </label>
+            </div>
+            <p align="center" class="item" ng-repeat="location in vm.locations | filter: vm.change.location" style="line-height: 5px !important"
+                ng-click="vm.complete(location)" ng-hide="vm.locationHide">{{location}}</p>
+
+            <button class="button button-balanced balanced-border button-block" type="submit">Submit</button>
         </form>
     </ion-content>
 
-    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top">
+    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top hide-on-keyboard-open">
         <a class="tab-item" ng-click="vm.goHome()">
             <i class="icon ion-home"></i>Home
         </a>

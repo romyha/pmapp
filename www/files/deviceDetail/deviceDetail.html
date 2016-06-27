@@ -2,55 +2,70 @@
     <!--<ion-nav-title class="logo"><img src="img/sncn_logo.png" height="50" width="185" /></ion-nav-title>-->
 
     <ion-content class="has-footer has-header">
+        
         <div class="list card small-margin ">
             <div class="item less-padding device-card">
                 <div class="row">
                     <div class="col col-90">
                         <h2>Name: {{vm.device.name}}</h2>
-                        <h2>ID: {{vm.device.id}} </h2>
+                        <h2>Code: {{vm.devicecode}} </h2>
+                        <h2 class="positive"><i class="icon ion-location larger"></i> {{vm.device.location}} </h2>
                     </div>
-                    <div class="col" align="right"><i class="col col-33 icon ion-record {{vm.device.status}}-status"></i></div>
-                    
+                    <div class="col" align="right">
+                        <div ng-style="vm.style" class="{{vm.device.status}}-status circles"></div>
+                    </div>
+
                 </div>
+
             </div>
-            <div class="item item-body less-padding device-card">
+            
+            <div class="item item-body less-padding device-card" ng-show="device.description">
                 <p>{{vm.device.description}}</p>
             </div>
         </div>
-        
+
+        <a class="button button-block button-balanced balanced-border more-side-margin bold" ng-href="#/app/devices/{{vm.devicecode}}/changes">Add Change</a>
+
         <div align="center" class="item item-divider dark-tabs"> CHANGES </div>
 
-        <div class="list card small-margin" ng-repeat="change in vm.device.changes | orderBy : '-date'">
-            <div class="item item-divider less-padding">
+        <div class="list card small-margin " ng-repeat="change in vm.device.changes | orderBy : '-date'">
+            <div class="item item-divider less-padding sidepad0" ng-model="vm.device.change">
                 <div class="row">
-                    <div align="left" class="col col-40">
+                    <div align="left" class="col col-center">
                         {{change.date | date : "d MMM yyyy"}}
                     </div>
-                    <div align="center" class="col col-40">
+                    <div align="center" class="col col-center" vertical-align="middle">
                         {{change.author}}
                     </div>
-                    <i class="col col-5 icon ion-record {{change.status}}-status" align="right"></i>
+                    
+                    <div class="col col-center no-padding" align="right" >
+                        <div vertical-align="middle" class="circles {{change.status}}-status"></div>
+                        <button ng-click="vm.toEdit(change._id)" class="dark less-padding actbutton button-icon ion-edit larger" ng-show="vm.canEdit(change.author)"></button>
+                        <button ng-click="vm.deleteChange(change._id)" class="no-padding actbutton button-icon ion-ios-trash-outline assertive larger" ng-show="vm.canEdit(change.author)"></button>
+                    </div>
                 </div>
             </div>
-            <div class="item item-text-wrap less-padding row">
-                <div class="col col-95">
-                {{change.message}} 
-                </div><button ng-click="vm.toEdit()" class="col-05 button button-icon ion-edit dark"></button>
+            <div class="item item-text-wrap less-padding" ng-show="change.message">
+                <i class="icon ion-chatboxes"></i>&nbsp;{{change.message}}
+                <!-- <div class="right"><a ng-click="vm.toEdit()" class="button button-icon ion-edit dark"></a></div>-->
+            </div>
+            <div class="item less-padding" ng-show="change.location">
+                <i class="icon ion-location larger middle positive"></i><span class="middle bold positive">&nbsp;{{change.location}}</span>
             </div>
         </div>
 
     </ion-content>
 
     <ion-footer class="tabs tabs-secondary tabs-icon-top dark-tabs">
-        
+
         <a class="tab-item" ng-click="vm.goHome()">
             <i class="icon ion-home"></i>Home
         </a>
-        <a class="tab-item" href="#/app/device/edit">
+        <a class="tab-item" href="#/app/devices/{{vm.devicecode}}/edit">
             <i class="icon ion-edit"></i>Edit
         </a>
-        <a class="tab-item" href="#/app/device/change/new">
-            <i class="icon ion-wrench"></i>Add change
+        <a class="tab-item" ng-click="vm.deleteDevice()">
+            <i class="icon ion-ios-trash-outline"></i>Delete Device
         </a>
 
     </ion-footer>

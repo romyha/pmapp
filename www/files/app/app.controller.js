@@ -1,62 +1,73 @@
 (function () {
-angular.module('starter.controllers', [])
+  angular.module('starter.controllers', [])
 
-  .controller('AppCtrl', function ($rootScope, $scope, $ionicHistory, $ionicModal, $timeout, $location, authentication) {
+    .controller('AppCtrl', function ($rootScope, $scope, $ionicModal, $timeout, $location, authentication, $ionicPopover, paths) {
 
-    document.addEventListener("deviceready", function () { screen.msLockOrientation('portrait'); }, false);
-    
-    
+      //avoid changing screen orientation
+      document.addEventListener("deviceready", function () { screen.lockOrientation('portrait'); }, false);
 
-
-    $rootScope.testMode = false;
-
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:   
-    $scope.$on('$ionicView.enter', function (e) {
-      $scope.isLoggedIn = authentication.isLoggedIn();
-
-      if (!$rootScope.testMode && !authentication.isLoggedIn() && ($location.path() != "/app/register")) {
-        $ionicHistory.nextViewOptions({
-          disableBack: true
-        });
-        $location.path("/app/login");
-        $ionicHistory.nextViewOptions.disableBack = false;
-
+      //tell app if running on device or in browser
+      if(!!window.cordova) {
+        $rootScope.browser = false;        
+      } else {
+        $rootScope.browser = true;
       }
-    });
 
-    //Logout
-    $rootScope.logout = function () {
-      authentication.logout();
-      $scope.isLoggedIn = authentication.isLoggedIn();
+      $scope.openPopover = function ($event) {
+        // Init popover on load
+        $ionicPopover.fromTemplateUrl('files/app/popover.html', {
+          scope: $scope,
+        }).then(function (popover) {
+          $scope.popover = popover;
+          $scope.popover.show($event);
+        });
+      };
 
-      $ionicHistory.nextViewOptions({
-        disableBack: true
+      $rootScope.testMode = false;
+
+      // With the new view caching in Ionic, Controllers are only called
+      // when they are recreated or on app start, instead of every page change.
+      // To listen for when this page is active (for example, to refresh data),
+      // listen for the $ionicView.enter event:   
+      $scope.$on('$ionicView.enter', function (e) {
+        $scope.isLoggedIn = authentication.isLoggedIn();
+
+        if (!$rootScope.testMode && !authentication.isLoggedIn() && ($location.path() != "/app/register")) {
+          paths.newPathDisableBack("/app/login");
+        }
       });
 
-      $location.path("/app/login");
-      $ionicHistory.nextViewOptions.disableBack = false;
-    }
+      //Logout
+      $rootScope.logout = function () {
+        authentication.logout();
+        $scope.isLoggedIn = authentication.isLoggedIn();
 
-    
-
-    $scope.onHelpPage = function () {
-      return $location.path() == "/app/help";
-    }
-    
-    $scope.enterHelp = function(){
-      $location.path("/app/help");
-    }
-
-    $scope.settings = function(){
-      $location.path("/app/settings");
-    }
-
-  })
+        paths.newPathDisableBack("/app/login");
+      }
 
 
-  
-  ;
+
+      $scope.onHelpPage = function () {
+        return $location.path() == "/app/help";
+      }
+
+      $scope.enterHelp = function () {
+        $scope.popover.hide();
+        $location.path("/app/help");
+      }
+
+      $scope.settings = function () {
+        $scope.popover.hide();
+        $location.path("/app/settings");
+      }
+      
+      $scope.onSettings = function () {
+        return $location.path() == "/app/settings";
+      }
+
+    })
+
+
+
+    ;
 })();

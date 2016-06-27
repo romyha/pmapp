@@ -3,7 +3,8 @@
 
     authentication.$inject = ['$window', '$http'];
     function authentication($window, $http, $resource) {
-        var apiUrl = 'http://192.168.0.30:5000/api';
+//        var apiUrl = 'http://192.168.0.30:5000/api';
+        var apiUrl = 'https://pma-service.synapticon.com/api';
         
         var saveToken = function (token) {
             $window.localStorage['loc8r-token'] = token;

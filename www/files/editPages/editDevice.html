@@ -1,41 +1,41 @@
 <ion-view title="Edit Device">
     <ion-content>
-        <form class="list">
-            <label class="item item-input">
+        <form class="list list-inset" ng-submit="vm.edit()">
+
+            <div class="item item-input-inset">
                 <span class="input-label">Name</span>
-                <input type="text" placeholder="Name">
+                <label class="item-input-wrapper">                
+                <input type="text" placeholder="Name" ng-model="vm.name" ng-change="vm.clear()">
             </label>
+            </div>
+            <p class="warning" ng-show="vm.nameerror">{{vm.nameerror}}</p>
 
-            <label class="item item-input">
-                <span class="input-label">Type</span>
-                <input type="text" placeholder="Type">
+            <div class="item item-input-inset">
+                <span class="input-label">Code</span>
+                <label class="item-input-wrapper">                
+                <input type="text" placeholder="Code" ng-model="vm.device.code" ng-change="vm.clear()">
             </label>
+            </div>
+            <p class="warning" ng-show="vm.codeerror">{{vm.codeerror}}</p>
 
-            <label class="item item-input">
-                <span class="input-label">ID</span>
-                <input type="text" placeholder="ID">
-            </label>
-            <label class="item item-select">
-                <span class="item-label">Status</span>
-                <select class="item-select" style="background-color: {{vm.color}} !important" ng-model="vm.selector" ng-change="vm.changeColor()">
-                    <option>none</option>
-                    <option>green</option>
-                    <option>yellow</option>
-                    <option>blue</option>
-                    <option>red</option>
-                </select>
-            </label>
+            <div class="item item-input-inset">
+                <span class="input-label">Location</span>
+                <label class="item-input-wrapper">
+                   <input name="location" type="text" placeholder="Location" ng-model="vm.device.location" ng-required="true" ng-change="vm.checkIfEmpty()">
+                </label>
+            </div>
+            <p align="center" class="item" ng-repeat="location in vm.locations | filter: vm.device.location" style="line-height: 5px !important"
+                ng-click="vm.complete(location)" ng-hide="vm.locationHide">{{location}}</p>
 
-
-            <label class="item item-input">
+            <label class="item item-input-inset">
                 <span class="input-label">Description</span>
-                <textarea placeholder="Description" class="big-area"></textarea>
+                <textarea placeholder="Description" class="big-area" ng-model="vm.description"></textarea>
             </label>
-            <button class="button button-outline button-dark button-full" ng-click="vm.addChange()">Edit</button>
+            <button class="button button-balanced balanced-border button-block" type="submit">Submit</button>
         </form>
     </ion-content>
 
-    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top">
+    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top hide-on-keyboard-open">
         <a class="tab-item" ng-click="vm.goHome()">
             <i class="icon ion-home"></i>Home
         </a>

@@ -1,42 +1,46 @@
-<ion-view view-title="Devices">
+<ion-view  view-title="Devices">
   <!--<ion-nav-title class="logo"><img src="img/sncn_logo.png" height="50" width="185" /></ion-nav-title>-->
 
 
-  <ion-header-bar class="item item-input bar-subheader">
+  <ion-header-bar  class="item item-input bar-subheader" >
       <i class="icon ion-search placeholder-icon "></i>
-      <input type="search" placeholder="Search by type, code or status-color" ng-model="textFilter">
+      <input type="search" placeholder="Search by type, code or status-color" ng-model="vm.textFilter" ng-change="vm.enableCancel()" focus-me="{{vm.focus}}">
+      <i class="icon button button-clear button-small button-stable ion-ios-close clear-button" ng-show="vm.searchEntered" ng-click="vm.clearSearch()"></i>
   </ion-header-bar>
 
   <ion-content class="has-footer has-header">
     <ion-list>
 
-      <ion-item id="top-row" align="center" class="item-divider dark-tabs">
+      <ion-item align="center" class="item item-divider dark-tabs" id="prop-bar">
         <div class="row">
-          <span class="col col-33">NAME</span>
-          <span class="col col-33">ID</span>
-          <span class="col col-33">STATUS</span>          
+          <span class="col col-33 button button-clear button-white" ng-click="vm.sort('name')">NAME <span ng-show="vm.nameOrder">
+            <i class="ion-arrow-up-b" ng-show="vm.up"></i><i class="ion-arrow-down-b" ng-hide="vm.up"></i></span></span>
+          <span class="col col-33 button button-clear button-white" ng-click="vm.sort('code')">CODE <span ng-show="vm.codeOrder">
+            <i class="ion-arrow-up-b" ng-show="vm.up"></i><i class="ion-arrow-down-b" ng-hide="vm.up"></i></span></span>
+          <span class="col col-33 button button-clear button-white" ng-click="vm.sort('status')">STATUS <span ng-show="vm.stateOrder">
+            <i class="ion-arrow-up-b" ng-show="vm.up"></i><i class="ion-arrow-down-b" ng-hide="vm.up"></i></span></span>          
         </div>
       </ion-item>
 
-      <div ng-repeat="device in vm.devices | filter : textFilter">
-        <ion-item align="center" href="#/app/device">
+      <div ng-repeat="device in vm.devices | filter : vm.textFilter | orderBy : vm.order">
+        <a align="center" class="item" ng-href="#/app/devices/{{device.code}}">
           <div class="row">
-            <span class="col col-33">{{device.name}}</span>
-            <span class="col col-33">{{device.id}}</span>
-            <i class="col col-33 icon ion-record {{device.status}}-status larger"></i>
-            <i class="col ion-chevron-right"></i>
+            <span class="col col-33 ellipsis no-left-pad">{{device.name}}</span>
+            <span class="col col-33">{{device.code}}</span>
+            <span class="col col-33 no-right-pad"><div class="circles {{device.status}}-status"></div></span>
+            <span align="right" class="col"><i class="larger ion-chevron-right"></i></span>
           </div>
-        </ion-item>
+        </a>
       </div>
     </ion-list>
 
   </ion-content>
   
   <ion-footer class="tabs tabs-secondary tabs-icon-top dark-tabs">
-    <a class="tab-item" href="#/app/camera">
+    <a class="tab-item" ng-click="vm.scan()">
       <i class="icon ion-qr-scanner"></i>Scan
     </a>
-    <a class="tab-item" href="#/app/devices/new">
+    <a class="tab-item" href="#/app/devices/code/new">
       <i class="icon ion-plus-round"></i>Add device
     </a>
 

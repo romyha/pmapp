@@ -1,23 +1,24 @@
 <ion-view view-title="Settings">
   <ion-content class="has-footer">
-    
+
     <div class="list list-inset">
-        <a class="item" ng-click="logout()" ng-show="isLoggedIn">
+      <div class="item item-divider">Account</div>
+      <a class="item" ng-click="logout()" ng-show="isLoggedIn">
             Logout
         </a>
-        <a class="item" ng-click="vm.endTestMode()" ng-show="testMode">
+      <a class="item" ng-click="vm.endTestMode()" ng-show="testMode">
             Finish Test Mode
         </a>
-        
+
     </div>
-    
+
   </ion-content>
 
   <ion-footer class="tabs tabs-secondary tabs-icon-top dark-tabs">
     <a class="tab-item" ng-click="vm.goHome()">
-  <i class="icon ion-home"></i>Home
-</a>
-   
+      <i class="icon ion-home"></i>Home
+    </a>
+
 
   </ion-footer>
 
