@@ -2,7 +2,7 @@
     angular.module('pm').controller('registerCtrl', registerCtrl);
     
     
-    function registerCtrl ($scope, $location, $ionicHistory, authentication) {
+    function registerCtrl ($scope, $location, $ionicHistory, authentication, paths) {
         var vm = this;
         vm.credentials = {};
         vm.doRegister = function () {
@@ -17,11 +17,7 @@
                 vm.log = "Registered";
 
                 //avoid back-button in nav
-                $ionicHistory.nextViewOptions({
-                    disableBack: true
-                });
-                $location.path('/app/devices');
-                $ionicHistory.nextViewOptions.disableBack = false;
+                paths.newPathDisableBack('/app/devices');
                 $scope.$apply();
             });
         };

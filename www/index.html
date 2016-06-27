@@ -8,24 +8,29 @@
 
   <link href="./lib/ionic/css/ionic.css" rel="stylesheet">
   <link href="./css/style.css" rel="stylesheet">
+  <link href="./lib/datepicker-for-ionic/dist/style.css" rel="stylesheet">
+
 
   <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
   <!-- ionic/angularjs js -->
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="./lib/ionic/js/ionic.bundle.js"></script>
   <script src="./lib/ionic/js/angular/angular-resource.min.js"></script>
   <script src="./lib/angular-route.min.js"></script>
+  <script src="./lib/datepicker-for-ionic/dist/templates.min.js"></script>
+  <script src="./lib/datepicker-for-ionic/dist/ionic-datepicker.min.js"></script>
 
 
   <!-- cordova script (this will be a 404 during development) -->
+  <script src="./lib/ng-cordova-master/dist/ng-cordova.min.js"></script>
   <script src="cordova.js"></script>
 
   <!-- your app's js -->
   <script src="./files/app.js"></script>
   <script src="./files/app/app.controller.js"></script>
-  <script src="./files/camera/camera.controller.js"></script>
   <script src="./files/settings/settings.controller.js"></script>
   <script src="./files/help/help.controller.js"></script>
   <script src="./files/auth/login.controller.js"></script>
@@ -34,10 +39,12 @@
   <script src="./files/editPages/editDevice.controller.js"></script>
   <script src="./files/editPages/editChange.controller.js"></script>
   <script src="./files/deviceDetail/device.controller.js"></script>
-  <script src="./files/addPages/change.controller.js"></script>
+  <script src="./files/addPages/addChange.controller.js"></script>
   <script src="./files/addPages/addDevice.controller.js"></script>
   <script src="./files/common/services/authentication.service.js"></script>
   <script src="./files/common/services/deviceData.service.js"></script>
+  <script src="./files/common/services/path.service.js"></script>
+  <script src="./files/common/directives/focus.directive.js"></script>
   <script src="./node_modules/angularjs-scope.safeapply/src/Scope.SafeApply.js"></script>
 
 </head>

@@ -1,13 +1,17 @@
 (function () {
   angular.module('starter.controllers', [])
 
-    .controller('AppCtrl', function ($rootScope, $scope, $ionicHistory, $ionicModal, $timeout, $location, authentication, $ionicPopover) {
+    .controller('AppCtrl', function ($rootScope, $scope, $ionicModal, $timeout, $location, authentication, $ionicPopover, paths) {
 
       //avoid changing screen orientation
       document.addEventListener("deviceready", function () { screen.lockOrientation('portrait'); }, false);
 
-
-
+      //tell app if running on device or in browser
+      if(!!window.cordova) {
+        $rootScope.browser = false;        
+      } else {
+        $rootScope.browser = true;
+      }
 
       $scope.openPopover = function ($event) {
         // Init popover on load
@@ -29,12 +33,7 @@
         $scope.isLoggedIn = authentication.isLoggedIn();
 
         if (!$rootScope.testMode && !authentication.isLoggedIn() && ($location.path() != "/app/register")) {
-          $ionicHistory.nextViewOptions({
-            disableBack: true
-          });
-          $location.path("/app/login");
-          $ionicHistory.nextViewOptions.disableBack = false;
-
+          paths.newPathDisableBack("/app/login");
         }
       });
 
@@ -43,12 +42,7 @@
         authentication.logout();
         $scope.isLoggedIn = authentication.isLoggedIn();
 
-        $ionicHistory.nextViewOptions({
-          disableBack: true
-        });
-
-        $location.path("/app/login");
-        $ionicHistory.nextViewOptions.disableBack = false;
+        paths.newPathDisableBack("/app/login");
       }
 
 

@@ -1,10 +1,4 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starter.auth', 'ngRoute'])
+angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starter.auth', 'ngRoute', 'ngCordova', 'ionic-datepicker'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -32,19 +26,6 @@ angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starte
         abstract: true,
         templateUrl: 'files/app/menu.html',
         controller: 'AppCtrl'
-      })
-
-
-
-      .state('app.camera', {
-        url: '/camera',
-        views: {
-          'menuContent': {
-            templateUrl: 'files/camera/camera.html',
-            controller: 'cameraCtrl',
-            controllerAs: 'vm'
-          }
-        }
       })
 
       .state('app.login', {
@@ -81,7 +62,7 @@ angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starte
       })
 
       .state('app.device', {
-        url: '/devices/:id',
+        url: '/devices/:code',
         views: {
           'menuContent': {
             templateUrl: 'files/deviceDetail/deviceDetail.html',
@@ -92,10 +73,10 @@ angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starte
       })
 
       .state('app.changeadd', {
-        url: '/devices/:id/changes',
+        url: '/devices/:code/changes',
         views: {
           'menuContent': {
-            templateUrl: 'files/addPages/newChange.html',
+            templateUrl: 'files/addPages/addChange.html',
             controller: 'changeCtrl',
             controllerAs: 'vm'
           }
@@ -103,7 +84,7 @@ angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starte
       })
       
       .state('app.changeedit', {
-        url: '/devices/:deviceid/changes/:changeid/edit',
+        url: '/devices/:code/changes/:changeid/edit',
         views: {
           'menuContent': {
             templateUrl: 'files/editPages/editChange.html',
@@ -114,10 +95,10 @@ angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starte
       })
 
       .state('app.deviceadd', {
-        url: '/devices/id/new',
+        url: '/devices/:code/new',
         views: {
           'menuContent': {
-            templateUrl: 'files/addPages/newDevice.html',
+            templateUrl: 'files/addPages/addDevice.html',
             controller: 'addDeviceCtrl',
             controllerAs: 'vm'
           }
@@ -125,7 +106,7 @@ angular.module('pm', ['ionic', 'starter.controllers', 'Scope.safeApply', 'starte
       })
       
       .state('app.deviceedit', {
-        url: '/devices/:id/edit',
+        url: '/devices/:code/edit',
         views: {
           'menuContent': {
             templateUrl: 'files/editPages/editDevice.html',

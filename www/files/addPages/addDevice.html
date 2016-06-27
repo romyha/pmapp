@@ -1,0 +1,65 @@
+<ion-view title="Add Device">
+    <ion-content>
+        <form name="deviceAddForm" class="list list-inset" ng-submit="vm.addDevice()">
+            <div class="item item-input-inset">
+                <span class="input-label ">Name*</span>
+                <label class="item-input-wrapper">                
+                <input name="devicename" type="text" placeholder="Name" ng-model="vm.device.name" ng-required="true" ng-change="vm.clear()">
+                
+            </label>
+            </div>
+            <p class="warning" ng-show="vm.nameerror">{{vm.nameerror}}</p>
+            <p ng-show="vm.submitted && deviceAddForm.devicename.$invalid" class="warning"><i class="ion-alert-circled"> Name required</i></p>
+
+            <div class="item item-input-inset">
+                <span class="input-label">Location*</span>
+                <label class="item-input-wrapper">
+                   <input name="location" type="text" placeholder="Location" ng-model="vm.device.location" ng-required="true" ng-change="vm.checkIfEmpty()">
+                </label>
+            </div>
+            <p ng-show="vm.submitted && deviceAddForm.location.$invalid" class="warning"><i class="ion-alert-circled"> Location required</i></p>
+            <p align="center" class="item" ng-repeat="location in vm.locations | filter: vm.device.location" style="line-height: 5px !important"
+                ng-click="vm.complete(location)" ng-hide="vm.locationHide">{{location}}</p>
+
+
+            <div class="item item-input-inset">
+                <span class="input-label">Code*</span>
+                <label class="item-input-wrapper">
+                
+                <input name="code" type="text" placeholder="Code" ng-model="vm.device.code" ng-required="true" ng-change="vm.clear()">
+            </label>
+            </div>
+            <p class="warning" ng-show="vm.codeerror">{{vm.codeerror}}</p>
+            <p ng-show="vm.submitted && deviceAddForm.code.$invalid" class="warning"><i class="ion-alert-circled"> Code required</i></p>
+
+            <label class="item item-select">
+                <span class="item-label">Status</span>
+                <select class="item-select"  style="background-color: {{vm.color}} !important;" ng-model="vm.selector" ng-change="vm.changeColor()">
+                    <option value="green">OK</option>
+                    <option value="yellow">Limited</option>
+                    <option value="blue">Reserved</option>
+                    <option value="red">Broken</option>
+                </select>
+            </label>
+
+
+            <label class="item item-input-inset">
+                <span class="input-label">Description</span>
+                <textarea placeholder="Description" class="big-area" ng-model="vm.device.description"></textarea>
+            </label>
+
+
+
+
+
+            <button class="button button-balanced balanced-border button-block" type="submit" ng-click="vm.submitted=true;">Add</button>
+        </form>
+    </ion-content>
+
+    <ion-footer class="dark-tabs tabs tabs-secondary tabs-icon-top hide-on-keyboard-open">
+        <a class="tab-item" ng-click="vm.goHome()">
+            <i class="icon ion-home"></i>Home
+        </a>
+    </ion-footer>
+
+</ion-view>

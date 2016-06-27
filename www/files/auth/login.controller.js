@@ -1,8 +1,8 @@
 (function () {
     angular.module("pm").controller("loginCtrl", loginCtrl);
 
-    loginCtrl.$inject = ['$rootScope', '$scope', '$location', '$ionicHistory', 'authentication'];
-    function loginCtrl($rootScope, $scope, $location, $ionicHistory, authentication) {
+    loginCtrl.$inject = ['$rootScope', '$scope', '$location', 'authentication', 'paths'];
+    function loginCtrl($rootScope, $scope, $location, authentication, paths) {
         var vm = this;
         $scope.isLoggedIn = authentication.isLoggedIn();
         $scope.loginData = {};
@@ -19,12 +19,7 @@
                 $scope.log = "logged";
                 $scope.isLoggedIn = authentication.isLoggedIn();
 
-                $ionicHistory.nextViewOptions({
-                    disableBack: true
-                });
-                $location.path("/app/devices");
-                $ionicHistory.nextViewOptions.disableBack = false;
-
+               paths.newPathDisableBack("/app/devices");
             });
 
         };
@@ -37,7 +32,6 @@
             $scope.isLoggedIn = true;
             $rootScope.testMode = true;
             $location.path("/app/devices");
-
         }
 
     };

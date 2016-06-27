@@ -3,10 +3,15 @@
 
     deviceData.$inject = ['$http'];
     function deviceData($http) {
-        var apiUrl = 'http://192.168.0.30:5000/api';
+        //var apiUrl = 'http://192.168.0.30:5000/api';
+        var apiUrl = 'https://pma-service.synapticon.com/api';
 
-        var deviceById = function (id) {
+        /*var deviceById = function (id) {
             return $http.get(apiUrl + '/devices/' + id);
+        };*/
+        
+        var deviceByCode = function (code) {
+            return $http.get(apiUrl + '/devices/' + code);
         };
         
         var addDevice = function(device) {
@@ -33,14 +38,35 @@
             return $http.put(apiUrl + '/devices/' + deviceid + '/changes/' + changeid, data);
         };
         
+        var deleteById = function(deviceid) {
+            return $http.delete(apiUrl + '/devices/' + deviceid);
+        }
+        
+        var locations = function() {
+            return $http.get(apiUrl + '/locations');
+        }
+        
+        var addLocation = function(location) {
+            return $http.post(apiUrl + '/locations', location);
+        }
+        
+        var deleteChange = function(deviceid, changeid) {
+            return $http.delete(apiUrl + '/devices/' + deviceid + '/changes/' + changeid);
+        }
+        
         return {
-            deviceById: deviceById,
+            //deviceById: deviceById,
             addDevice: addDevice,
             devices: devices,
             addChangeById: addChangeById,
             editDeviceById: editDeviceById,
             editChangeById: editChangeById,
-            changeById: changeById
+            changeById: changeById,
+            deleteById: deleteById,
+            locations: locations,
+            addLocation: addLocation,
+            deviceByCode: deviceByCode,
+            deleteChange: deleteChange
         };
     }
 })();
