@@ -1,9 +1,10 @@
 (function () {
     angular.module("pm").controller("editDeviceCtrl", editDeviceCtrl);
 
-    editDeviceCtrl.$iject = ['$location', '$stateParams', 'deviceData', 'paths'];
-    function editDeviceCtrl($location, $stateParams, deviceData, paths) {
+    editDeviceCtrl.$iject = ['$location', '$stateParams', 'deviceData', 'paths', 'authentication'];
+    function editDeviceCtrl($location, $stateParams, deviceData, paths, authentication) {
         var vm = this;
+        var location;
 
         vm.devicecode = $stateParams.code;
 
@@ -15,7 +16,7 @@
         deviceData.deviceByCode(vm.devicecode).success(function (data) {
             vm.name = data.name;
             vm.description = data.description;
-            vm.location = data.location;
+            location = data.location;
             vm.device = data;
             vm.selector = vm.device.status;
             vm.changeColor();
@@ -43,9 +44,16 @@
                 //status not editable, because depends on changes
                 name: vm.name,
                 description: vm.description,
-                location: vm.device.location,
                 code: vm.device.code
             }).success(function (device) {
+                if (location != vm.device.location) {
+                    deviceData.addChangeById(vm.device._id, {
+                        author: authentication.currentUser().name,
+                        status: vm.device.status,
+                        location: vm.device.location,
+                        date: new Date()
+                    })
+                }
                 if (!(vm.locations.indexOf(vm.device.location) > -1)) {
                     deviceData.addLocation({
                         name: vm.device.location

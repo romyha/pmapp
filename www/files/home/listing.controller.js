@@ -70,56 +70,6 @@
             vm.focus = true;
         }
 
-        /*vm.devices = [{
-            name: "DC5K A3",
-            code: 1,
-            status: "green"
-        }, {
-                name: "DC5K A2",
-                code: 2,
-                status: "yellow"
-            }, {
-                name: "DC5K A1",
-                code: 3,
-                status: "green"
-            }, {
-                name: "CA11 A.2",
-                code: 4,
-                status: "blue"
-            }, {
-                name: "CA11 A.1",
-                code: 5,
-                status: "red"
-            }, {
-                name: "C22",
-                code: 6,
-                status: "red"
-            }, {
-                name: "DC30 A2",
-                code: 9274,
-                status: "yellow"
-            }, {
-                name: "DC30 A1",
-                code: 628,
-                status: "yellow"
-            }, {
-                name: "DC 500",
-                code: 94,
-                status: "blue"
-            }, {
-                name: "S021",
-                code: 9271,
-                status: "green"
-            }, {
-                name: "S091",
-                code: 90127,
-                status: "red"
-            }, {
-                name: "S001",
-                code: 9012,
-                status: "blue"
-            }];*/
-
         vm.scan = function () {
 
             if (!!window.cordova) {   //if running in browser, don't show loading

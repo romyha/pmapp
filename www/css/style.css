@@ -198,3 +198,8 @@ select {
 .no-right-pad {
     padding-right: 0;
 }
+
+input[readonly] {
+    background-color: rgb(238, 238, 238) !important;
+    color: grey
+}

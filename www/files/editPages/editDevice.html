@@ -21,7 +21,7 @@
             <div class="item item-input-inset">
                 <span class="input-label">Location</span>
                 <label class="item-input-wrapper">
-                   <input name="location" type="text" placeholder="Location" ng-model="vm.device.location" ng-required="true" ng-change="vm.checkIfEmpty()">
+                   <input name="location" type="text" ng-model="vm.device.location" ng-change="vm.checkIfEmpty()">
                 </label>
             </div>
             <p align="center" class="item" ng-repeat="location in vm.locations | filter: vm.device.location" style="line-height: 5px !important"
